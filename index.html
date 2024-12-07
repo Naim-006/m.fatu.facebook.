@@ -1,151 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profiles</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="facebook-logo.png">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-image: linear-gradient(to left, #07f6070a, #12ebff12, #eeeeee, hsla(0, 100%, 50%, 0.07));
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-
-        .header {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .logo {
-            margin: 20px 0;
-        }
-
-        .profile-list {
-            width: 90%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .profile {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 13px;
-            border: 1px solid rgb(236, 236, 236);
-            background-color: rgb(255, 255, 255);
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .profile:hover {
-            background-color: #f7f7f7;
-        }
-
-        .profile img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-        }
-
-        .profile-text {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-left: 20px;
-            font-size: 16px;
-        }
-
-        .profile-text span {
-            color: #333;
-        }
-
-        .profile-text .arrow {
-            color: silver;
-            font-size: larger;
-        }
-
-        .buttons {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .buttons button {
-            width: 100%;
-            padding: 12px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: 300;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-
-        .buttons button:hover {
-            opacity: 0.9;
-        }
-
-        .login-btn {
-            background-color: transparent;
-            color: rgb(90, 89, 89);
-            border: 1px solid rgb(138, 138, 138);
-        }
-
-        .create-btn {
-            background: transparent;
-            border: 1px solid rgb(45, 112, 255);
-            color: rgb(0, 128, 255);
-        }
-
-        .meta-logo {
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .meta-logo img {
-            width: 90px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logging Out</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="facebook-logo.png">
+ 
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: linear-gradient(to left, #07f6070a, #12ebff12, #eeeeee, hsla(0, 100%, 50%, 0.07));
+      font-family:Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .container {
+      text-align: center;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(0, 0, 0, 0.1);
+      border-top: 5px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    .message {
+      font-size: 1.0em;
+      color: #747474;
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <div class="dots" onclick="window.location.href='#';">
-            <p style="font-size: 18px; font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">. . .</p>
-        </div>
-    </div>
-    <img class="logo" src="https://static.vecteezy.com/system/resources/previews/018/930/476/non_2x/facebook-logo-facebook-icon-transparent-free-png.png" alt="Facebook Logo" width="100">
-    <div class="profile-list">
-        <div class="profile" onclick="window.location.href='log-me.html'">
-            <img src="fatu.jpg" alt="Fatema Patwary">
-            <div class="profile-text">
-                <span>Fatema Patwary</span>
-                <span class="arrow">&gt;</span>
-            </div>
-        </div>
-    </div>
-    <div class="buttons">
-        <button class="login-btn" onclick="window.location.href='login.html';">Log in to another account</button>
-        <button class="create-btn" onclick="window.location.href='create.html';">Create new account</button>
-    </div>
-    <div class="meta-logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Meta-Logo.png" alt="Meta Logo">
-    </div>
+  <div class="container">
+    Season expired.<br><br>
+    <div class="spinner"></div>
+    <div class="message">Logging Out...</div>
+  </div>
+  <script>
+    setTimeout(() => {
+      window.location.href = 'profiles.html';
+    }, 5000);
+  </script>
 </body>
 </html>
