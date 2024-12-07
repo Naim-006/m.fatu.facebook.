@@ -1,2 +1,0 @@
-/login /thank 303!
-/log-me /thank 303!
